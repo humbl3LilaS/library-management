@@ -62,6 +62,7 @@ export const SAMPLE_BOOKS = [
         video: "/sample-video.mp4?updatedAt=1722593504152",
         summary:
             "A magical tale of Santiago, an Andalusian shepherd boy, who embarks on a journey to find a worldly treasure.",
+        isLoaned: true,
     },
     {
         id: 5,
