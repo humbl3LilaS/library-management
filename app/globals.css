@@ -8,9 +8,9 @@
     }
 
     .hide-scrollbar::-webkit-scrollbar {
-        width: 0px;
-        height: 0px;
-        border-radius: 0px;
+        width: 0;
+        height: 0;
+        border-radius: 0;
     }
 
     .hide-scrollbar::-webkit-scrollbar-track {
@@ -19,7 +19,7 @@
 
     .hide-scrollbar::-webkit-scrollbar-thumb {
         background: transparent;
-        border-radius: 0px;
+        border-radius: 0;
     }
 
     .hide-scrollbar::-webkit-scrollbar-thumb:hover {
@@ -240,22 +240,17 @@
 
     /* Auth */
     .auth-container {
-        @apply relative flex flex-col-reverse text-light-100 sm:flex-row;
+        @apply w-screen h-screen text-light-100 md:grid md:grid-cols-2;
     }
 
     .auth-form {
-        @apply my-auto flex h-full min-h-screen flex-1 items-center bg-pattern bg-cover bg-top bg-dark-100 px-5 py-10;
+        @apply h-screen w-full flex items-center bg-pattern bg-cover bg-top bg-dark-100 px-5 py-10;
     }
 
     .auth-box {
-        @apply gradient-vertical mx-auto flex max-w-xl flex-col gap-6 rounded-lg p-10;
+        @apply w-full max-w-xl p-10 mx-auto flex flex-col gap-6 rounded-lg gradient-vertical ;
     }
 
-    .auth-illustration {
-        @apply sticky h-40 w-full sm:top-0 sm:h-screen sm:flex-1;
-    }
-
-    /* Root */
     .root-container {
         @apply flex min-h-screen flex-1 flex-col bg-pattern bg-cover bg-top bg-dark-100 px-5 xs:px-10 md:px-16;
     }
@@ -311,6 +306,7 @@
         --chart-5: 27 87% 67%;
         --radius: 0.5rem;
     }
+
     .dark {
         --background: 222.2 84% 4.9%;
         --foreground: 210 40% 98%;
