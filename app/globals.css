@@ -240,7 +240,7 @@
 
     /* Auth */
     .auth-container {
-        @apply w-screen h-screen text-light-100 md:grid md:grid-cols-2;
+        @apply w-screen h-screen text-light-100 md:grid md:grid-cols-2 font-ibm-plex-sans;
     }
 
     .auth-form {
