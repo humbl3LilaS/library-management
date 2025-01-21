@@ -1,17 +1,22 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { SignUpSchema, TSignUpSchema } from "@/validation";
+import { SignUpSchema, SignUpSchemaDefaultValues, TSignUpSchema } from "@/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import ImageUploader from "@/components/image-kit/image-uploader";
+import { sleep } from "@/lib/utils";
+import { Loader2 } from "lucide-react";
 
 const SignUpForm = () => {
     const form = useForm<TSignUpSchema>({
         resolver: zodResolver(SignUpSchema),
+        defaultValues: { ...SignUpSchemaDefaultValues },
     });
-    const onSubmit: SubmitHandler<TSignUpSchema> = (values) => {
+    const onSubmit: SubmitHandler<TSignUpSchema> = async (values) => {
+        await sleep(3000);
         console.log(values);
     };
     return (
@@ -47,7 +52,7 @@ const SignUpForm = () => {
                         name={"email"}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Username</FormLabel>
+                                <FormLabel>Gmail</FormLabel>
                                 <FormControl>
                                     <Input
                                         className={"form-input"}
@@ -64,7 +69,7 @@ const SignUpForm = () => {
                         name={"id"}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Username</FormLabel>
+                                <FormLabel>ID</FormLabel>
                                 <FormControl>
                                     <Input
                                         className={"form-input"}
@@ -81,7 +86,7 @@ const SignUpForm = () => {
                         name={"password"}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Username</FormLabel>
+                                <FormLabel>Password</FormLabel>
                                 <FormControl>
                                     <Input
                                         className={"form-input"}
@@ -92,9 +97,35 @@ const SignUpForm = () => {
                             </FormItem>
                         )}
                     />
+                    <FormField
+                        control={form.control}
+                        name={"idCard"}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>ID card</FormLabel>
+                                <FormControl>
+                                    <ImageUploader
+                                        onFileChange={field.onChange}
+                                        value={field.value}
+                                    />
+                                </FormControl>
+                            </FormItem>
+                        )}
+                    />
 
-                    <Button className={"form-btn"} type={"submit"}>
-                        Sign Up
+                    <Button
+                        className={"form-btn"}
+                        type={"submit"}
+                        disabled={form.formState.isSubmitting || !form.formState.isValid}
+                    >
+                        {form.formState.isSubmitting ? (
+                            <>
+                                <Loader2 className={"animate-spin inline-block mr-2"} />
+                                <span>Signing Up..</span>
+                            </>
+                        ) : (
+                            <span>Sign Up</span>
+                        )}
                     </Button>
                 </div>
             </form>

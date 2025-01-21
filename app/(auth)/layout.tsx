@@ -13,7 +13,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
                     <div>{children}</div>
                 </div>
             </section>
-            <section className={"h-screen hidden md:block"}>
+            <section className={" hidden md:block"}>
                 <Image
                     src={"/images/auth-illustration.png"}
                     alt={"auth illustration"}
