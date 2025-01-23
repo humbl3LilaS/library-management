@@ -7,17 +7,35 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ImageUploader from "@/components/image-kit/image-uploader";
-import { sleep } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
+import { signUp } from "@/actions/auth";
+import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 
 const SignUpForm = () => {
     const form = useForm<TSignUpSchema>({
         resolver: zodResolver(SignUpSchema),
         defaultValues: { ...SignUpSchemaDefaultValues },
     });
+
+    const router = useRouter();
+
+    const { toast } = useToast();
     const onSubmit: SubmitHandler<TSignUpSchema> = async (values) => {
-        await sleep(3000);
-        console.log(values);
+        const result = await signUp(values);
+        console.log(result);
+        if (!result.success) {
+            return toast({
+                title: result.cause.reason,
+                variant: "destructive",
+                duration: 2000,
+            });
+        }
+        toast({
+            title: "Signed up successfully",
+            duration: 2000,
+        });
+        return router.replace("/");
     };
     return (
         <Form {...form}>
@@ -66,10 +84,10 @@ const SignUpForm = () => {
 
                     <FormField
                         control={form.control}
-                        name={"id"}
+                        name={"universityId"}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>ID</FormLabel>
+                                <FormLabel>University ID</FormLabel>
                                 <FormControl>
                                     <Input
                                         className={"form-input"}

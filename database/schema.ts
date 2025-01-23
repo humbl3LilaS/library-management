@@ -1,4 +1,5 @@
 import { date, pgEnum, pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
 
 export const STATUS_ENUM = pgEnum("status", ["PENDING", "APPROVED", "REJECTED"]);
 export const ROLE_ENUM = pgEnum("role", ["ADMIN", "USER"]);
@@ -16,3 +17,6 @@ export const users = pgTable("users", {
     lastActive: date("last_active").defaultNow(),
     createAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
 });
+
+export const userInsertSchema = createInsertSchema(users);
+export type IUser = Zod.infer<typeof userInsertSchema>;

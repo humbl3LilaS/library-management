@@ -2,7 +2,7 @@ import BookOverview from "@/components/home/book-overview";
 import BookList from "@/components/home/book-list";
 import { SAMPLE_BOOKS } from "@/constants/placeholder";
 
-export default function Home() {
+export default async function Home() {
     return (
         <>
             <BookOverview data={SAMPLE_BOOKS[0]} />

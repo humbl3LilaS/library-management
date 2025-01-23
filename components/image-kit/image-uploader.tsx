@@ -3,7 +3,7 @@
 import { IKImage, IKUpload, ImageKitProvider } from "imagekitio-next";
 import config from "@/lib/config";
 import { authenticator } from "@/image-kit/authenticator";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { IKUploadResponse } from "imagekitio-next/src/components/IKUpload/props";

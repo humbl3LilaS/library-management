@@ -6,14 +6,31 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { signInWithCredentials } from "@/actions/auth";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
 const SignInForm = () => {
     const form = useForm<TSignInSchema>({
         resolver: zodResolver(SignInSchema),
     });
 
-    const onSubmit: SubmitHandler<TSignInSchema> = (values) => {
-        console.log(values);
+    const router = useRouter();
+    const { toast } = useToast();
+    const onSubmit: SubmitHandler<TSignInSchema> = async (values) => {
+        const result = await signInWithCredentials(values);
+        if (!result.success) {
+            toast({
+                title: result.cause.reason,
+                variant: "destructive",
+                duration: 2000,
+            });
+        }
+        toast({
+            title: "Signed In Successfully",
+            duration: 2000,
+        });
+        return router.replace("/");
     };
     return (
         <Form {...form}>
@@ -45,7 +62,7 @@ const SignInForm = () => {
                         name={"password"}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Email</FormLabel>
+                                <FormLabel>Password</FormLabel>
                                 <FormControl>
                                     <Input
                                         className={"form-input"}
