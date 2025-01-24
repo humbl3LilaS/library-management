@@ -2,8 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { HEADER_NAV_ITEMS } from "@/constants";
 import NavLink from "@/components/layout/nav-link";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { auth } from "@/auth";
+import { parseUserAlisa } from "@/lib/utils";
 
-const Header = () => {
+const Header = async () => {
+    const session = await auth();
+
     return (
         <header className={"my-10 flex justify-between gap-5"}>
             <Link href="/">
@@ -13,6 +18,16 @@ const Header = () => {
                 {HEADER_NAV_ITEMS.map((item) => (
                     <NavLink key={item.title} href={item.href} title={item.title} />
                 ))}
+                <li>
+                    <Link href="/">
+                        <Avatar>
+                            <AvatarImage src={"https://github.com/shadcn.png"} />
+                            <AvatarFallback>
+                                {parseUserAlisa(session?.user.name ?? "")}
+                            </AvatarFallback>
+                        </Avatar>
+                    </Link>
+                </li>
             </ul>
         </header>
     );
