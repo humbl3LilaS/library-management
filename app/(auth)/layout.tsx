@@ -15,8 +15,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
             </section>
             <section className={" hidden md:block"}>
                 <Image
-                    src={"/images/auth-illustration.png"}
-                    alt={"auth illustration"}
+                    src={"/images/share-illustration.png"}
+                    alt={"share illustration"}
                     width={1000}
                     height={1000}
                     className={"h-full"}

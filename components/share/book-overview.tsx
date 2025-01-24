@@ -1,7 +1,7 @@
 import { IBook } from "@/types/index.types";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import BookCover from "@/components/home/book-cover";
+import BookCover from "@/components/share/book-cover";
 
 const BookOverview = ({ data }: { data: IBook }) => {
     return (

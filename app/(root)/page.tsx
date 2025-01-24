@@ -1,5 +1,5 @@
-import BookOverview from "@/components/home/book-overview";
-import BookList from "@/components/home/book-list";
+import BookOverview from "@/components/share/book-overview";
+import BookList from "@/components/share/book-list";
 import { SAMPLE_BOOKS } from "@/constants/placeholder";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";

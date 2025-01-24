@@ -8,9 +8,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ImageUploader from "@/components/image-kit/image-uploader";
 import { Loader2 } from "lucide-react";
-import { signUp } from "@/actions/auth";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
+import { signUp } from "@/feature/client/sign-up/actions/sign-up-action";
 
 const SignUpForm = () => {
     const form = useForm<TSignUpSchema>({

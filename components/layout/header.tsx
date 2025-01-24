@@ -19,7 +19,7 @@ const Header = async () => {
                     <NavLink key={item.title} href={item.href} title={item.title} />
                 ))}
                 <li>
-                    <Link href="/">
+                    <Link href={`/profile/${session?.user.id}`}>
                         <Avatar>
                             <AvatarImage src={"https://github.com/shadcn.png"} />
                             <AvatarFallback>

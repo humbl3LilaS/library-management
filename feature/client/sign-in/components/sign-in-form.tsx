@@ -6,11 +6,11 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { signInWithCredentials } from "@/actions/auth";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
-import PasswordField from "@/components/auth/password-field";
+import PasswordField from "@/components/share/password-field";
+import { signInWithCredentials } from "@/feature/client/sign-in/actions/sign-in-action";
 
 const SignInForm = () => {
     const form = useForm<TSignInSchema>({
