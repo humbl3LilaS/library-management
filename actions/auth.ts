@@ -6,6 +6,7 @@ import { eq } from "drizzle-orm";
 import { AuthErrorCause, IAuthError } from "@/error/AuthError";
 import { hash } from "bcryptjs";
 import { signIn } from "@/auth";
+import { CredentialsSignin } from "next-auth";
 
 export const signUp = async (
     params: Omit<IUser, "id">
@@ -84,12 +85,20 @@ export const signInWithCredentials = async ({
         }
         return { success: true };
     } catch (e: unknown) {
-        console.log(e);
-        return {
-            success: false,
-            cause: {
-                reason: "Error during Signing in process",
-            } as AuthErrorCause,
-        };
+        if (e instanceof CredentialsSignin) {
+            return {
+                success: false,
+                cause: {
+                    reason: e.cause?.err?.message ?? "Invalid Credential",
+                },
+            };
+        } else {
+            return {
+                success: false,
+                cause: {
+                    reason: "Error during Signing in process",
+                } as AuthErrorCause,
+            };
+        }
     }
 };

@@ -248,7 +248,7 @@
     }
 
     .auth-box {
-        @apply w-full max-w-xl p-10 mx-auto flex flex-col gap-6 rounded-lg gradient-vertical ;
+        @apply w-full max-w-xl p-10 mx-auto flex flex-col gap-6 rounded-lg gradient-vertical;
     }
 
     .root-container {

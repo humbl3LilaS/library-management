@@ -1,4 +1,4 @@
-import NextAuth, { User } from "next-auth";
+import NextAuth, { CredentialsSignin, User } from "next-auth";
 import CredentialProvider from "next-auth/providers/credentials";
 import { db } from "@/database/drizzle";
 import { users } from "@/database/schema";
@@ -30,7 +30,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     user.password
                 );
                 if (!isPasswordValid) {
-                    return null;
+                    throw new CredentialsSignin("Invalid Credentials", {
+                        cause: {
+                            reason: "Invalid Password Holy Crist",
+                        },
+                    });
                 }
                 return {
                     id: user.id,

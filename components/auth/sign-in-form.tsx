@@ -9,18 +9,25 @@ import Link from "next/link";
 import { signInWithCredentials } from "@/actions/auth";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
+import { Loader2 } from "lucide-react";
+import PasswordField from "@/components/auth/password-field";
 
 const SignInForm = () => {
     const form = useForm<TSignInSchema>({
         resolver: zodResolver(SignInSchema),
+        defaultValues: {
+            email: "",
+            password: "",
+        },
     });
 
     const router = useRouter();
     const { toast } = useToast();
     const onSubmit: SubmitHandler<TSignInSchema> = async (values) => {
         const result = await signInWithCredentials(values);
+        console.log(result);
         if (!result.success) {
-            toast({
+            return toast({
                 title: result.cause.reason,
                 variant: "destructive",
                 duration: 2000,
@@ -64,17 +71,24 @@ const SignInForm = () => {
                             <FormItem>
                                 <FormLabel>Password</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        className={"form-input"}
-                                        placeholder={"Eg: Superman2234"}
-                                        {...field}
-                                    />
+                                    <PasswordField onChange={field.onChange} value={field.value} />
                                 </FormControl>
                             </FormItem>
                         )}
                     />
-                    <Button className={"form-btn"} type={"submit"}>
-                        Sign In
+                    <Button
+                        className={"form-btn"}
+                        type={"submit"}
+                        disabled={form.formState.isSubmitting || !form.formState.isValid}
+                    >
+                        {form.formState.isSubmitting ? (
+                            <>
+                                <Loader2 className={"animate-spin inline-block mr-2"} />
+                                <span>Signing In..</span>
+                            </>
+                        ) : (
+                            <span>Sign In</span>
+                        )}
                     </Button>
                 </div>
             </form>
