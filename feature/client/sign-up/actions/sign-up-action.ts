@@ -1,14 +1,30 @@
+"use server";
 import { IUser, users } from "@/database/schema";
 import { AuthErrorCause, IAuthError } from "@/error/AuthError";
 import { db } from "@/database/drizzle";
 import { eq } from "drizzle-orm";
 import { hash } from "bcryptjs";
 import { signInWithCredentials } from "@/feature/client/sign-in/actions/sign-in-action";
+import { ratelimit } from "@/upstash/ratelimit";
+import { headers } from "next/headers";
 
 export const signUp = async (
     params: Omit<IUser, "id">
 ): Promise<{ success: true } | { success: false; cause: AuthErrorCause }> => {
     try {
+        // rate limiting
+        const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
+        const { success } = await ratelimit.limit(ip);
+        if (!success) {
+            return {
+                success: false,
+                cause: {
+                    reason: "Too Many Actions",
+                    redirect: true,
+                },
+            };
+        }
+
         const [existingUser] = await db.select().from(users).where(eq(users.email, params.email));
         if (existingUser) {
             throw new IAuthError("Existing User Email", {

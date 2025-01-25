@@ -4,7 +4,7 @@ import Header from "@/components/layout/header";
 const Layout = ({ children }: { children: ReactNode }) => {
     return (
         <main className={"root-container"}>
-            <div className={"mx-auto  max-w-7xl"}>
+            <div className={"flex-1 mx-auto  max-w-7xl"}>
                 <Header />
                 <div className={"mt-20 mb-20"}>{children}</div>
             </div>

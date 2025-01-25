@@ -23,7 +23,15 @@ const SignUpForm = () => {
     const { toast } = useToast();
     const onSubmit: SubmitHandler<TSignUpSchema> = async (values) => {
         const result = await signUp(values);
-        console.log(result);
+        if (!result.success && result.cause.redirect) {
+            toast({
+                title: result.cause.reason,
+                variant: "destructive",
+                duration: 2000,
+            });
+            return router.push("/too-fast");
+        }
+
         if (!result.success) {
             return toast({
                 title: result.cause.reason,
@@ -31,6 +39,7 @@ const SignUpForm = () => {
                 duration: 2000,
             });
         }
+
         toast({
             title: "Signed up successfully",
             duration: 2000,

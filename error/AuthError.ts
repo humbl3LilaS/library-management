@@ -9,5 +9,6 @@ export class IAuthError extends Error {
 
 export interface AuthErrorCause {
     reason: string;
+    redirect?: boolean;
     field?: string[];
 }

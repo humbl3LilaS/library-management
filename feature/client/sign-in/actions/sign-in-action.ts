@@ -3,6 +3,8 @@
 import { AuthErrorCause } from "@/error/AuthError";
 import { signIn } from "@/auth";
 import { CredentialsSignin } from "next-auth";
+import { ratelimit } from "@/upstash/ratelimit";
+import { headers } from "next/headers";
 
 export const signInWithCredentials = async ({
     email,
@@ -12,6 +14,19 @@ export const signInWithCredentials = async ({
     password: string;
 }): Promise<{ success: true } | { success: false; cause: AuthErrorCause }> => {
     try {
+        //rate limiting
+        const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
+        const { success } = await ratelimit.limit(ip);
+        if (!success) {
+            return {
+                success: false,
+                cause: {
+                    reason: "Too Many Actions",
+                    redirect: true,
+                },
+            };
+        }
+
         const result = await signIn("credentials", {
             email,
             password,
@@ -28,6 +43,7 @@ export const signInWithCredentials = async ({
         }
         return { success: true };
     } catch (e: unknown) {
+        console.log(e);
         if (e instanceof CredentialsSignin) {
             return {
                 success: false,
