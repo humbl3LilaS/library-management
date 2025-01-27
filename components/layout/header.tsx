@@ -10,7 +10,7 @@ const Header = async () => {
     const session = await auth();
 
     return (
-        <header className={"my-10 flex justify-between gap-5"}>
+        <header className={"py-10 flex justify-between gap-5"}>
             <Link href="/">
                 <Image src={"/icons/logo.svg"} alt={"logo"} width={40} height={40} />
             </Link>

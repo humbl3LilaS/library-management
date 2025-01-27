@@ -12,7 +12,7 @@ export default async function Home() {
     return (
         <>
             <BookOverview data={SAMPLE_BOOKS[0]} />
-            <BookList title={"Latest Books"} books={SAMPLE_BOOKS} />
+            <BookList title={"Latest Books"} books={SAMPLE_BOOKS} className={"py-20"} />
         </>
     );
 }
