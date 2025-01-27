@@ -53,7 +53,7 @@ export const signUp = async (
             };
         }
 
-        await signInWithCredentials({ email: params.email, password: hashedPassword });
+        await signInWithCredentials({ email: params.email, password: params.password });
         return { success: true };
     } catch (e: unknown) {
         if (e instanceof IAuthError) {

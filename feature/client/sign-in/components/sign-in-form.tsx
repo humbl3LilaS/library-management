@@ -45,7 +45,7 @@ const SignInForm = () => {
             title: "Signed In Successfully",
             duration: 2000,
         });
-        // return router.replace("/");
+        return router.replace("/");
     };
     return (
         <Form {...form}>
@@ -102,7 +102,7 @@ const SignInForm = () => {
             </form>
             <p className={"mt-3 text-center font-medium"}>
                 New to BookWise?&nbsp;
-                <Link href={"/sign-in"} className={"font-bold text-primary"}>
+                <Link href={"/sign-up"} className={"font-bold text-primary"}>
                     Create new account
                 </Link>
             </p>

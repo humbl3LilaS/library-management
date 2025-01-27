@@ -11,6 +11,7 @@ import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { signUp } from "@/feature/client/sign-up/actions/sign-up-action";
+import PasswordField from "@/components/share/password-field";
 
 const SignUpForm = () => {
     const form = useForm<TSignUpSchema>({
@@ -115,11 +116,7 @@ const SignUpForm = () => {
                             <FormItem>
                                 <FormLabel>Password</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        className={"form-input"}
-                                        placeholder={"Super2222"}
-                                        {...field}
-                                    />
+                                    <PasswordField onChange={field.onChange} value={field.value} />
                                 </FormControl>
                             </FormItem>
                         )}
@@ -141,7 +138,7 @@ const SignUpForm = () => {
                     />
 
                     <Button
-                        className={"form-btn"}
+                        className={"form-btn mt-4"}
                         type={"submit"}
                         disabled={form.formState.isSubmitting || !form.formState.isValid}
                     >

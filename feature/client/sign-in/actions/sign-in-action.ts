@@ -43,7 +43,6 @@ export const signInWithCredentials = async ({
         }
         return { success: true };
     } catch (e: unknown) {
-        console.log(e);
         if (e instanceof CredentialsSignin) {
             return {
                 success: false,
