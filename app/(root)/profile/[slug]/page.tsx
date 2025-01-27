@@ -5,6 +5,7 @@ import { signOut } from "@/auth";
 
 const ProfilePage = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params;
+    console.log(slug);
     return (
         <>
             <BookList title={"Borrowed Book"} books={SAMPLE_BOOKS} className={"py-10"} />
