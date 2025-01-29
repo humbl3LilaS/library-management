@@ -60,7 +60,8 @@ const getUserState = async (email: string): Promise<UserState> => {
         return "non-active";
     }
     const lastActive = new Date(user.lastActive);
-    const timeDiff = new Date().getTime() - lastActive.getTime();
+    const now = new Date();
+    const timeDiff = now.getTime() - lastActive.getTime();
     if (timeDiff > THREE_DAYS_IN_MS && timeDiff <= THIRTY_DAYS_IN_MS) {
         return "non-active";
     }

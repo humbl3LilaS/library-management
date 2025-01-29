@@ -54,7 +54,7 @@ export const signUp = async (
             };
         }
         await workflowClient.trigger({
-            url: `${process.env.NEXT_PUBLIC_API_END_POINT}/api/workflow/onboarding`,
+            url: `${process.env.NEXT_PUBLIC_API_END_POINT}/api/workflows/onboarding`,
             body: {
                 email: params.email,
                 fullName: new_user[0].fullName,
