@@ -57,7 +57,7 @@ type UserState = "non-active" | "active" | "not-login";
 const getUserState = async (email: string): Promise<UserState> => {
     const [user] = await db.select().from(users).where(eq(users.email, email)).limit(1);
     if (!user) {
-        return "not-login";
+        return "non-active";
     }
     const lastActive = new Date(user.lastActive);
     const timeDiff = new Date().getTime() - lastActive.getTime();
