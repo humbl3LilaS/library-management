@@ -14,7 +14,7 @@ export const users = pgTable("users", {
     idCard: text("id_card").notNull(),
     status: STATUS_ENUM("status").default("PENDING"),
     role: ROLE_ENUM("role").default("USER"),
-    lastActive: date("last_active").defaultNow(),
+    lastActive: date("last_active").defaultNow().notNull(),
     createAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
 });
 

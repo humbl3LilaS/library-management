@@ -7,6 +7,7 @@ import { hash } from "bcryptjs";
 import { signInWithCredentials } from "@/feature/client/sign-in/actions/sign-in-action";
 import { ratelimit } from "@/upstash/ratelimit";
 import { headers } from "next/headers";
+import { workflowClient } from "@/upstash/workflow";
 
 export const signUp = async (
     params: Omit<IUser, "id">
@@ -49,10 +50,16 @@ export const signUp = async (
                 success: false,
                 cause: {
                     reason: "Error Creating new user",
-                } as AuthErrorCause,
+                },
             };
         }
-
+        await workflowClient.trigger({
+            url: `${process.env.NEXT_PUBLIC_API_END_POINT}/api/workflow/onboarding`,
+            body: {
+                email: params.email,
+                fullName: new_user[0].fullName,
+            },
+        });
         await signInWithCredentials({ email: params.email, password: params.password });
         return { success: true };
     } catch (e: unknown) {
@@ -68,7 +75,7 @@ export const signUp = async (
                 success: false,
                 cause: {
                     reason: "Error Signing Up",
-                } as AuthErrorCause,
+                },
             };
         }
     }
