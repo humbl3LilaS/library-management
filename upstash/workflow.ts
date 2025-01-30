@@ -1,13 +1,14 @@
 import { Client as WorkflowClient } from "@upstash/workflow";
 import { Client as QStashClient, resend } from "@upstash/qstash";
+import config from "@/lib/config";
 
 export const workflowClient = new WorkflowClient({
-    baseUrl: process.env.UPSTASH_QSTASH_URL!,
-    token: process.env.UPSTASH_QSTASH_TOKEN!,
+    baseUrl: config.env.upstash.qstashUrl,
+    token: config.env.upstash.qstashToken,
 });
 
 const qstashClient = new QStashClient({
-    token: process.env.UPSTASH_QSTASH_TOKEN!,
+    token: config.env.upstash.qstashToken,
 });
 
 type SendEmailPayload = {
@@ -20,11 +21,11 @@ export const sendEmail = async ({ email, subject, message }: SendEmailPayload) =
         api: {
             name: "email",
             provider: resend({
-                token: process.env.RESEND_API_KEY!,
+                token: config.env.resend.token,
             }),
         },
         body: {
-            from: "Pale Edelweiss <noti.pale-edelweiss.tech>",
+            from: "Pale Edelweiss <pale-edelweiss.tech>",
             to: [email],
             subject,
             html: message,
