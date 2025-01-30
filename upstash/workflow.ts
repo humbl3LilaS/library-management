@@ -25,7 +25,7 @@ export const sendEmail = async ({ email, subject, message }: SendEmailPayload) =
             }),
         },
         body: {
-            from: "Pale Edelweiss <contact@pale-edelweiss.tech>",
+            from: "PaleEdelweiss <noti@pale-edelweiss.tech>",
             to: [email],
             subject,
             html: message,
