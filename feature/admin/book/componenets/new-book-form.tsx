@@ -1,6 +1,6 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { BookSchema, BookSchemaDefaultValues, TBookSchema } from "@/validation";
+import { BookSchemaDefaultValues } from "@/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -10,17 +10,37 @@ import ImageUploader from "@/components/image-kit/image-uploader";
 import VideoUploader from "@/image-kit/video-uploader";
 import ColorPicker from "@/feature/admin/book/componenets/color-picker";
 import { Loader2 } from "lucide-react";
+import { bookInsertSchema, IBookInsert } from "@/database/schema";
+import { addNewBook } from "@/feature/admin/book/actions/add-new-book";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
 const NewBookForm = () => {
-    const form = useForm<TBookSchema>({
-        resolver: zodResolver(BookSchema),
+    const form = useForm<IBookInsert>({
+        resolver: zodResolver(bookInsertSchema),
         defaultValues: {
             ...BookSchemaDefaultValues,
         },
     });
 
-    const onSubmit: SubmitHandler<TBookSchema> = async (values) => {
-        console.log(values);
+    const router = useRouter();
+    const { toast } = useToast();
+
+    const onSubmit: SubmitHandler<IBookInsert> = async (values) => {
+        const result = await addNewBook(values);
+        if (!result.success) {
+            return toast({
+                title: "Failed to add new book",
+                description: result.cause.reason,
+                variant: "destructive",
+            });
+        }
+
+        toast({
+            title: "Added New Book",
+            description: "Successfully added New Book",
+        });
+        return router.push("/admin/books");
     };
     return (
         <Form {...form}>

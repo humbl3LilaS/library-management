@@ -1,6 +1,6 @@
 "use server";
 import { IUserInsert, users } from "@/database/schema";
-import { AuthErrorCause, IAuthError } from "@/error/AuthError";
+import { AuthErrorCause, IAuthError } from "@/error/auth-error";
 import { db } from "@/database/drizzle";
 import { eq } from "drizzle-orm";
 import { hash } from "bcryptjs";

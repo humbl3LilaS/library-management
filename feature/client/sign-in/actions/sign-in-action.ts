@@ -1,6 +1,6 @@
 "use server";
 
-import { AuthErrorCause } from "@/error/AuthError";
+import { AuthErrorCause } from "@/error/auth-error";
 import { signIn } from "@/auth";
 import { CredentialsSignin } from "next-auth";
 import { ratelimit } from "@/upstash/ratelimit";
