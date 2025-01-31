@@ -8,13 +8,20 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { IKUploadResponse } from "imagekitio-next/src/components/IKUpload/props";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
 type ImageUploaderProps = {
     onFileChange: (valuePath: string) => void;
     value: string;
+    folder: string;
+    accept: string;
+    className?: {
+        button?: string;
+        file?: string;
+    };
 };
 
-const ImageUploader = ({ onFileChange, value }: ImageUploaderProps) => {
+const ImageUploader = ({ onFileChange, value, folder, accept, className }: ImageUploaderProps) => {
     const ikUploadRef = useRef<HTMLInputElement | null>(null);
 
     const { toast } = useToast();
@@ -52,15 +59,31 @@ const ImageUploader = ({ onFileChange, value }: ImageUploaderProps) => {
                 ref={ikUploadRef}
                 onError={onError}
                 onSuccess={onSuccess}
+                folder={folder}
+                accept={accept}
             />
 
-            <Button className={"upload-btn"} onClick={onUpload}>
+            <Button
+                className={cn(
+                    "flex min-h-14 w-full items-center justify-center gap-1.5 rounded-md text-black",
+                    className?.button
+                )}
+                onClick={onUpload}
+            >
                 <Image src={"/icons/upload.svg"} alt={"upload-icon"} width={20} height={20} />
                 <span className={"font-bold"}>Upload Image</span>
                 {value && <span className={"block"}>{value}</span>}
             </Button>
 
-            {value && <IKImage alt={value} path={value} width={500} height={300} />}
+            {value && (
+                <IKImage
+                    alt={value}
+                    path={value}
+                    width={500}
+                    height={300}
+                    className={cn("w-full", className?.file)}
+                />
+            )}
         </ImageKitProvider>
     );
 };

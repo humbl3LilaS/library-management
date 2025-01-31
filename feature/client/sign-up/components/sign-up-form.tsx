@@ -132,6 +132,8 @@ const SignUpForm = () => {
                                     <ImageUploader
                                         onFileChange={field.onChange}
                                         value={field.value}
+                                        folder={"users/id"}
+                                        accept={"image/*"}
                                     />
                                 </FormControl>
                             </FormItem>

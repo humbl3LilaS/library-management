@@ -12,11 +12,11 @@ type BookCoverProps = {
 };
 
 const variantStyles: Record<BookCoverVariants, string> = {
-    extraSmall: "book-cover_extra_small",
-    small: "book-cover_small",
-    medium: "book-cover_medium",
-    regular: "book-cover_regular",
-    wide: "book-cover_wide",
+    extraSmall: "books-cover_extra_small",
+    small: "books-cover_small",
+    medium: "books-cover_medium",
+    regular: "books-cover_regular",
+    wide: "books-cover_wide",
 };
 
 const BookCover = ({
@@ -37,7 +37,7 @@ const BookCover = ({
             <div className={"absolute z-10"} style={{ left: "12%", width: "87.5%", height: "88%" }}>
                 <Image
                     src={coverUrl}
-                    alt={"book cover"}
+                    alt={"books cover"}
                     fill
                     className={"rounded-sm object-fill"}
                 />

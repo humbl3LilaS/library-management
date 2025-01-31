@@ -42,7 +42,7 @@ const bebasNeue = localFont({
 
 export const metadata: Metadata = {
     title: "BookWise",
-    description: "BookWise is a book library",
+    description: "BookWise is a books library",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

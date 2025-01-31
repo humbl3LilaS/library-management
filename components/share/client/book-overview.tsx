@@ -38,7 +38,7 @@ const BookOverview = ({ data }: { data: IBook }) => {
                 <p className={"book-description"}>{data.description}</p>
 
                 <Button className={"book-overview_btn"}>
-                    <Image src={"/icons/book.svg"} alt={"book"} width={20} height={20} />
+                    <Image src={"/icons/book.svg"} alt={"books"} width={20} height={20} />
                     <span className={"font-bebas-neue text-xl text-bark-100"}>Borrow</span>
                 </Button>
             </div>
