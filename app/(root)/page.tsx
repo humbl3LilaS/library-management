@@ -1,10 +1,8 @@
-import BookOverview from "@/components/share/book-overview";
-import BookList from "@/components/share/book-list";
+import BookOverview from "@/components/share/client/book-overview";
+import BookList from "@/components/share/client/book-list";
 import { SAMPLE_BOOKS } from "@/constants/placeholder";
-import config from "@/lib/config";
 
 export default function Home() {
-    console.log(config);
     return (
         <>
             <BookOverview data={SAMPLE_BOOKS[0]} />

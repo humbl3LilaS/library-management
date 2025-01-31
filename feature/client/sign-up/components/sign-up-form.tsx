@@ -11,7 +11,7 @@ import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { signUp } from "@/feature/client/sign-up/actions/sign-up-action";
-import PasswordField from "@/components/share/password-field";
+import PasswordField from "@/components/share/client/password-field";
 
 const SignUpForm = () => {
     const form = useForm<TSignUpSchema>({

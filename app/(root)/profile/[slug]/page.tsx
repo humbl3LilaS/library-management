@@ -1,4 +1,4 @@
-import BookList from "@/components/share/book-list";
+import BookList from "@/components/share/client/book-list";
 import { SAMPLE_BOOKS } from "@/constants/placeholder";
 import { Button } from "@/components/ui/button";
 import { signOut } from "@/auth";

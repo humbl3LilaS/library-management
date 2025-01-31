@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import BookCoverSvg from "@/components/share/book-cover-svg";
+import BookCoverSvg from "@/components/share/client/book-cover-svg";
 
 type BookCoverVariants = "extraSmall" | "small" | "medium" | "regular" | "wide";
 

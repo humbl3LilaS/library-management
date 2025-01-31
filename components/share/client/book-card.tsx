@@ -1,6 +1,6 @@
 import { IBook } from "@/types/index.types";
 import Link from "next/link";
-import BookCover from "@/components/share/book-cover";
+import BookCover from "@/components/share/client/book-cover";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";

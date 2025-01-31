@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
-import PasswordField from "@/components/share/password-field";
+import PasswordField from "@/components/share/client/password-field";
 import { signInWithCredentials } from "@/feature/client/sign-in/actions/sign-in-action";
 
 const SignInForm = () => {

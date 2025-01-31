@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { HEADER_NAV_ITEMS } from "@/constants";
-import NavLink from "@/components/layout/nav-link";
+import { HEADER_NAV_ITEMS } from "@/constants/client";
+import NavLink from "@/components/layout/client/nav-link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { auth } from "@/auth";
 import { parseUserAlisa } from "@/lib/utils";
@@ -11,7 +11,7 @@ const Header = async () => {
 
     return (
         <header className={"py-10 flex justify-between gap-5"}>
-            <Link href="/">
+            <Link href="/public">
                 <Image src={"/icons/logo.svg"} alt={"logo"} width={40} height={40} />
             </Link>
             <ul className={"flex items-center gap-8"}>
