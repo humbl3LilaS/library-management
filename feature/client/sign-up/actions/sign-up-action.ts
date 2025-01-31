@@ -1,5 +1,5 @@
 "use server";
-import { IUser, users } from "@/database/schema";
+import { IUserInsert, users } from "@/database/schema";
 import { AuthErrorCause, IAuthError } from "@/error/AuthError";
 import { db } from "@/database/drizzle";
 import { eq } from "drizzle-orm";
@@ -10,7 +10,7 @@ import { headers } from "next/headers";
 import { workflowClient } from "@/upstash/workflow";
 
 export const signUp = async (
-    params: Omit<IUser, "id">
+    params: IUserInsert
 ): Promise<{ success: true } | { success: false; cause: AuthErrorCause }> => {
     try {
         // rate limiting

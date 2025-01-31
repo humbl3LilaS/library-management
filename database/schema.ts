@@ -18,5 +18,16 @@ export const users = pgTable("users", {
     createAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
 });
 
-export const userInsertSchema = createInsertSchema(users);
-export type IUser = Zod.infer<typeof userInsertSchema>;
+export const userInsertSchema = createInsertSchema(users, {
+    fullName: (schema) => schema.min(5).max(30),
+    email: (schema) => schema.email(),
+    password: (schema) => schema.min(8),
+}).omit({
+    id: true,
+    lastActive: true,
+    createAt: true,
+    status: true,
+    role: true,
+});
+
+export type IUserInsert = Zod.infer<typeof userInsertSchema>;

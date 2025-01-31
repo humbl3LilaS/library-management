@@ -1,6 +1,6 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { SignUpSchema, SignUpSchemaDefaultValues, TSignUpSchema } from "@/validation";
+import { SignUpSchemaDefaultValues } from "@/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -12,17 +12,18 @@ import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { signUp } from "@/feature/client/sign-up/actions/sign-up-action";
 import PasswordField from "@/components/share/client/password-field";
+import { IUserInsert, userInsertSchema } from "@/database/schema";
 
 const SignUpForm = () => {
-    const form = useForm<TSignUpSchema>({
-        resolver: zodResolver(SignUpSchema),
+    const form = useForm<IUserInsert>({
+        resolver: zodResolver(userInsertSchema),
         defaultValues: { ...SignUpSchemaDefaultValues },
     });
 
     const router = useRouter();
 
     const { toast } = useToast();
-    const onSubmit: SubmitHandler<TSignUpSchema> = async (values) => {
+    const onSubmit: SubmitHandler<IUserInsert> = async (values) => {
         const result = await signUp(values);
         if (!result.success && result.cause.redirect) {
             toast({

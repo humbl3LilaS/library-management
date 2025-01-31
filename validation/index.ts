@@ -1,16 +1,7 @@
 import { z } from "zod";
+import { IUserInsert } from "@/database/schema";
 
-export const SignUpSchema = z.object({
-    fullName: z.string().min(4),
-    email: z.string().email(),
-    universityId: z.string(),
-    password: z.string().min(8),
-    idCard: z.string().nonempty(),
-});
-
-export type TSignUpSchema = Zod.infer<typeof SignUpSchema>;
-
-export const SignUpSchemaDefaultValues: TSignUpSchema = {
+export const SignUpSchemaDefaultValues: IUserInsert = {
     fullName: "",
     email: "",
     idCard: "",
