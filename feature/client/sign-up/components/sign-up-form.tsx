@@ -134,6 +134,7 @@ const SignUpForm = () => {
                                         value={field.value}
                                         folder={"users/id"}
                                         accept={"image/*"}
+                                        variant={"dark"}
                                     />
                                 </FormControl>
                             </FormItem>

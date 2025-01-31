@@ -10,19 +10,33 @@ import { IKUploadResponse } from "imagekitio-next/src/components/IKUpload/props"
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
+import { cva, VariantProps } from "class-variance-authority";
 
-type ImageUploaderProps = {
+export const imageUploader = cva(
+    ["flex min-h-14 w-full items-center justify-center gap-1.5 rounded-md "],
+    {
+        variants: {
+            variant: {
+                light: ["text-white bg-primary-admin"],
+                dark: ["text-black"],
+            },
+        },
+        defaultVariants: {
+            variant: "dark",
+        },
+    }
+);
+
+type ImageUploaderVarient = VariantProps<typeof imageUploader>;
+
+interface ImageUploaderProps extends ImageUploaderVarient {
     onFileChange: (valuePath: string) => void;
     value: string;
     folder: string;
     accept: string;
-    className?: {
-        button?: string;
-        file?: string;
-    };
-};
+}
 
-const ImageUploader = ({ onFileChange, value, folder, accept, className }: ImageUploaderProps) => {
+const ImageUploader = ({ onFileChange, value, folder, accept, variant }: ImageUploaderProps) => {
     const ikUploadRef = useRef<HTMLInputElement | null>(null);
     const [uploading, setUploading] = useState(false);
     const { toast } = useToast();
@@ -67,13 +81,7 @@ const ImageUploader = ({ onFileChange, value, folder, accept, className }: Image
                 onUploadStart={() => setUploading(true)}
             />
 
-            <Button
-                className={cn(
-                    "flex min-h-14 w-full items-center justify-center gap-1.5 rounded-md text-black",
-                    className?.button
-                )}
-                onClick={onUpload}
-            >
+            <Button onClick={onUpload} className={cn(imageUploader({ variant }))}>
                 {uploading ? (
                     <Loader2 className={"animate-spin"} />
                 ) : (
@@ -86,13 +94,7 @@ const ImageUploader = ({ onFileChange, value, folder, accept, className }: Image
             </Button>
 
             {value && (
-                <IKImage
-                    alt={value}
-                    path={value}
-                    width={500}
-                    height={300}
-                    className={cn("w-full", className?.file)}
-                />
+                <IKImage alt={value} path={value} width={500} height={300} className={"w-full"} />
             )}
         </ImageKitProvider>
     );

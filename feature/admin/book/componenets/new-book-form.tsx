@@ -139,6 +139,7 @@ const NewBookForm = () => {
                                         value={field.value}
                                         folder={"books/covers"}
                                         accept={"image/*"}
+                                        variant={"light"}
                                     />
                                 </FormControl>
                             </FormItem>
