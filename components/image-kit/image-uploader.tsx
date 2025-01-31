@@ -3,12 +3,13 @@
 import { IKImage, IKUpload, ImageKitProvider } from "imagekitio-next";
 import config from "@/lib/config";
 import { authenticator } from "@/image-kit/authenticator";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { IKUploadResponse } from "imagekitio-next/src/components/IKUpload/props";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import { Loader2 } from "lucide-react";
 
 type ImageUploaderProps = {
     onFileChange: (valuePath: string) => void;
@@ -23,9 +24,10 @@ type ImageUploaderProps = {
 
 const ImageUploader = ({ onFileChange, value, folder, accept, className }: ImageUploaderProps) => {
     const ikUploadRef = useRef<HTMLInputElement | null>(null);
-
+    const [uploading, setUploading] = useState(false);
     const { toast } = useToast();
     const onError = () => {
+        setUploading(false);
         toast({
             title: "Image upload failed",
             variant: "default",
@@ -33,6 +35,7 @@ const ImageUploader = ({ onFileChange, value, folder, accept, className }: Image
         });
     };
     const onSuccess = (res: IKUploadResponse) => {
+        setUploading(false);
         onFileChange(res.filePath);
         toast({
             title: "Image uploaded successfully",
@@ -61,6 +64,7 @@ const ImageUploader = ({ onFileChange, value, folder, accept, className }: Image
                 onSuccess={onSuccess}
                 folder={folder}
                 accept={accept}
+                onUploadStart={() => setUploading(true)}
             />
 
             <Button
@@ -70,8 +74,14 @@ const ImageUploader = ({ onFileChange, value, folder, accept, className }: Image
                 )}
                 onClick={onUpload}
             >
-                <Image src={"/icons/upload.svg"} alt={"upload-icon"} width={20} height={20} />
-                <span className={"font-bold"}>Upload Image</span>
+                {uploading ? (
+                    <Loader2 className={"animate-spin"} />
+                ) : (
+                    <Image src={"/icons/upload.svg"} alt={"upload-icon"} width={20} height={20} />
+                )}
+                <span className={"font-bold"}>
+                    {uploading ? "Uploading Image" : "Upload Image"}
+                </span>
                 {value && <span className={"block"}>{value}</span>}
             </Button>
 

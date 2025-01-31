@@ -6,6 +6,7 @@ import config from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { IKUploadResponse } from "imagekitio-next/src/components/IKUpload/props";
+import { Loader2 } from "lucide-react";
 
 type VideoUploaderProps = {
     onFileChange: (valuePath: string) => void;
@@ -16,10 +17,10 @@ type VideoUploaderProps = {
 
 const VideoUploader = ({ onFileChange, value, folder, accept }: VideoUploaderProps) => {
     const ikUploadRef = useRef<HTMLInputElement | null>(null);
-    const [progress, setProgress] = useState(0);
-
+    const [uploading, setUploading] = useState(false);
     const { toast } = useToast();
     const onError = () => {
+        setUploading(false);
         toast({
             title: "Video upload failed",
             variant: "default",
@@ -27,6 +28,7 @@ const VideoUploader = ({ onFileChange, value, folder, accept }: VideoUploaderPro
         });
     };
     const onSuccess = (res: IKUploadResponse) => {
+        setUploading(false);
         onFileChange(res.filePath);
         toast({
             title: "Video uploaded successfully",
@@ -66,11 +68,7 @@ const VideoUploader = ({ onFileChange, value, folder, accept }: VideoUploaderPro
                 onError={onError}
                 onSuccess={onSuccess}
                 validateFile={onValidate}
-                onUploadStart={() => setProgress(0)}
-                onUploadProgress={({ loaded, total }) => {
-                    const percent = Math.round((loaded / total) * 100);
-                    setProgress(percent);
-                }}
+                onUploadStart={() => setUploading(true)}
                 folder={folder}
                 accept={accept}
             />
@@ -81,18 +79,16 @@ const VideoUploader = ({ onFileChange, value, folder, accept }: VideoUploaderPro
                 }
                 onClick={onUpload}
             >
-                <Image src={"/icons/upload.svg"} alt={"upload-icon"} width={20} height={20} />
-                <span className={"font-bold"}>Upload Video</span>
+                {uploading ? (
+                    <Loader2 className={"animate-spin"} />
+                ) : (
+                    <Image src={"/icons/upload.svg"} alt={"upload-icon"} width={20} height={20} />
+                )}
+                <span className={"font-bold"}>
+                    {uploading ? "Uploading Video" : "Upload Video"}
+                </span>
                 {value && <span className={"block"}>{value}</span>}
             </Button>
-
-            {progress > 0 && progress !== 100 && (
-                <div className="w-full rounded-full bg-green-200">
-                    <div className="progress" style={{ width: `${progress}%` }}>
-                        {progress}%
-                    </div>
-                </div>
-            )}
 
             {value && <IKVideo path={value} controls={true} className={"h-96 w-full rounded-xl"} />}
         </ImageKitProvider>
