@@ -10,17 +10,17 @@ const AdminSideBar = async () => {
     return (
         <aside>
             <div className={"admin-sidebar"}>
-                <nav>
+                <nav className={"h-full flex flex-col"}>
                     <div className={"logo"}>
                         <Image src={"/icons/admin/logo.svg"} alt={"logo"} height={40} width={40} />
                         <h1>BookWise</h1>
                     </div>
-                    <ul className={"mt-10 flex flex-col gap-4"}>
+                    <ul className={"h-full mt-10 flex flex-col gap-4"}>
                         {ADMIN_NAV_ITEMS.map((item) => (
                             <NavLink key={item.title} data={item} />
                         ))}
                     </ul>
-                    <div className={"user"}>
+                    <div className={"user mt-auto"}>
                         <Avatar>
                             <AvatarFallback className={"bg-amber-100"}>
                                 {parseUserAlisa(session?.user.name || "US")}
