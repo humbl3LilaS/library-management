@@ -75,7 +75,7 @@ const VideoUploader = ({ onFileChange, value, folder, accept }: VideoUploaderPro
 
             <Button
                 className={
-                    "flex min-h-14 w-full items-center justify-center gap-1.5 rounded-md text-black"
+                    "flex min-h-14 w-full items-center justify-center gap-1.5 rounded-md text-white bg-primary-admin hover:bg-primary-admin/80 transition-colors duration-500"
                 }
                 onClick={onUpload}
             >

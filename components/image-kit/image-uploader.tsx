@@ -17,7 +17,9 @@ export const imageUploader = cva(
     {
         variants: {
             variant: {
-                light: ["text-white bg-primary-admin"],
+                light: [
+                    "text-white bg-primary-admin hover:bg-primary-admin/80 transition-colors duration-500",
+                ],
                 dark: ["text-black"],
             },
         },

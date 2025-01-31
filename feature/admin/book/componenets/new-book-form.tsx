@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import ImageUploader from "@/components/image-kit/image-uploader";
 import VideoUploader from "@/image-kit/video-uploader";
 import ColorPicker from "@/feature/admin/book/componenets/color-picker";
+import { Loader2 } from "lucide-react";
 
 const NewBookForm = () => {
     const form = useForm<TBookSchema>({
@@ -219,8 +220,21 @@ const NewBookForm = () => {
                             </FormItem>
                         )}
                     />
-                    <Button className={"py-6 bg-primary-admin text-white"} type={"submit"}>
-                        Add Book
+                    <Button
+                        className={
+                            "bg-primary-admin text-white mt-4 disabled:bg-primary-admin/50 disabled:text-white/50"
+                        }
+                        type={"submit"}
+                        disabled={form.formState.isSubmitting || !form.formState.isValid}
+                    >
+                        {form.formState.isSubmitting ? (
+                            <>
+                                <Loader2 className={"animate-spin inline-block mr-2"} />
+                                <span>Adding New Book...</span>
+                            </>
+                        ) : (
+                            <span>Add Book to Library</span>
+                        )}
                     </Button>
                 </div>
             </form>
