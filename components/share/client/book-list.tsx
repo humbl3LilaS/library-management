@@ -1,6 +1,6 @@
-import { IBook } from "@/types/index.types";
 import { cn } from "@/lib/utils";
 import BookCard from "@/components/share/client/book-card";
+import { IBook } from "@/database/schema";
 
 type BookListProps = {
     title: string;

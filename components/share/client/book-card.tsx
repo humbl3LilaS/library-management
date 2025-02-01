@@ -1,11 +1,11 @@
-import { IBook } from "@/types/index.types";
 import Link from "next/link";
 import BookCover from "@/components/share/client/book-cover";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { IBook } from "@/database/schema";
 
-const BookCard = ({ data }: { data: IBook }) => {
+const BookCard = ({ data }: { data: IBook & { isLoaned?: boolean } }) => {
     return (
         <article className={cn(data.isLoaned && "max-sm:col-span-2")}>
             <Link
@@ -15,7 +15,10 @@ const BookCard = ({ data }: { data: IBook }) => {
                         "max-sm:w-full max-sm:flex flex-col items-center"
                 )}
             >
-                <BookCover coverColor={data.color} coverUrl={data.cover} />
+                <BookCover
+                    coverColor={data.coverColor}
+                    coverUrl={data.coverUrl}
+                />
             </Link>
             <div
                 className={cn(

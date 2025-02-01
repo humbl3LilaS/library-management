@@ -1,35 +1,44 @@
+"use client";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import BookCoverSvg from "@/components/share/client/book-cover-svg";
+import { IKImage } from "imagekitio-next";
+import config from "@/lib/config";
+import { cva, VariantProps } from "class-variance-authority";
 
-type BookCoverVariants = "extraSmall" | "small" | "medium" | "regular" | "wide";
+const bookCover = cva([], {
+    variants: {
+        variant: {
+            extraSmall: "w-[28.95px] h-10",
+            small: "w-[55px] h-[76px]",
+            medium: "w-[144px] h-[199px]",
+            regular: "xs:w-[174px] w-[114px] xs:h-[239px] h-[169px]",
+            wide: "xs:w-[296px] w-[256px] xs:h-[404px] h-[354px]",
+        },
+    },
+    defaultVariants: {
+        variant: "regular",
+    },
+});
 
-type BookCoverProps = {
-    variant?: BookCoverVariants;
+type BookCoverVariants = VariantProps<typeof bookCover>;
+
+interface BookCoverProps extends BookCoverVariants {
     className?: string;
-    coverColor?: string;
-    coverUrl?: string;
-};
-
-const variantStyles: Record<BookCoverVariants, string> = {
-    extraSmall: "books-cover_extra_small",
-    small: "books-cover_small",
-    medium: "books-cover_medium",
-    regular: "books-cover_regular",
-    wide: "books-cover_wide",
-};
+    coverColor: string;
+    coverUrl: string;
+}
 
 const BookCover = ({
-    variant = "regular",
-    coverColor = "#012b48",
-    coverUrl = "https://placehold.co/400x600.png",
+    variant,
+    coverColor,
+    coverUrl,
     className,
 }: BookCoverProps) => {
     return (
         <div
             className={cn(
                 "relative transition-all duration-300",
-                variantStyles[variant],
+                bookCover({ variant }),
                 className
             )}
         >
@@ -38,11 +47,12 @@ const BookCover = ({
                 className={"absolute z-10"}
                 style={{ left: "12%", width: "87.5%", height: "88%" }}
             >
-                <Image
-                    src={coverUrl}
+                <IKImage
+                    path={coverUrl}
                     alt={"books cover"}
+                    urlEndpoint={config.env.imageKit.endPoint}
                     fill
-                    className={"rounded-sm object-fill"}
+                    className={" rounded-sm object-fill"}
                 />
             </div>
         </div>
