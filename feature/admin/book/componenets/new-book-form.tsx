@@ -2,7 +2,13 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { BookSchemaDefaultValues } from "@/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -51,7 +57,11 @@ const NewBookForm = () => {
                         name={"title"}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className={"text-base font-normal text-dark-500"}>
+                                <FormLabel
+                                    className={
+                                        "text-base font-normal text-dark-500"
+                                    }
+                                >
                                     Title
                                 </FormLabel>
                                 <FormControl>
@@ -70,7 +80,11 @@ const NewBookForm = () => {
                         name={"author"}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className={"text-base font-normal text-dark-500"}>
+                                <FormLabel
+                                    className={
+                                        "text-base font-normal text-dark-500"
+                                    }
+                                >
                                     Author
                                 </FormLabel>
                                 <FormControl>
@@ -89,7 +103,11 @@ const NewBookForm = () => {
                         name={"genre"}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className={"text-base font-normal text-dark-500"}>
+                                <FormLabel
+                                    className={
+                                        "text-base font-normal text-dark-500"
+                                    }
+                                >
                                     Book genre
                                 </FormLabel>
                                 <FormControl>
@@ -108,7 +126,11 @@ const NewBookForm = () => {
                         name={"totalCopies"}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className={"text-base font-normal text-dark-500"}>
+                                <FormLabel
+                                    className={
+                                        "text-base font-normal text-dark-500"
+                                    }
+                                >
                                     Total numbers of books
                                 </FormLabel>
                                 <FormControl>
@@ -117,7 +139,9 @@ const NewBookForm = () => {
                                         min={1}
                                         max={1000}
                                         className={"book-form_input"}
-                                        placeholder={"Eg: Total numbers of books"}
+                                        placeholder={
+                                            "Eg: Total numbers of books"
+                                        }
                                         {...field}
                                     />
                                 </FormControl>
@@ -130,7 +154,11 @@ const NewBookForm = () => {
                         name={"rating"}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className={"text-base font-normal text-dark-500"}>
+                                <FormLabel
+                                    className={
+                                        "text-base font-normal text-dark-500"
+                                    }
+                                >
                                     Rating
                                 </FormLabel>
                                 <FormControl>
@@ -139,7 +167,9 @@ const NewBookForm = () => {
                                         min={0}
                                         max={5}
                                         className={"book-form_input"}
-                                        placeholder={"Eg: Total numbers of books"}
+                                        placeholder={
+                                            "Eg: Total numbers of books"
+                                        }
                                         {...field}
                                     />
                                 </FormControl>
@@ -151,7 +181,11 @@ const NewBookForm = () => {
                         name={"coverUrl"}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className={"text-base font-normal text-dark-500"}>
+                                <FormLabel
+                                    className={
+                                        "text-base font-normal text-dark-500"
+                                    }
+                                >
                                     Book Cover
                                 </FormLabel>
                                 <FormControl>
@@ -172,11 +206,18 @@ const NewBookForm = () => {
                         name={"coverColor"}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className={"text-base font-normal text-dark-500"}>
+                                <FormLabel
+                                    className={
+                                        "text-base font-normal text-dark-500"
+                                    }
+                                >
                                     Primary Color
                                 </FormLabel>
                                 <FormControl>
-                                    <ColorPicker value={field.value} onChange={field.onChange} />
+                                    <ColorPicker
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
                                 </FormControl>
                             </FormItem>
                         )}
@@ -187,7 +228,11 @@ const NewBookForm = () => {
                         name={"description"}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className={"text-base font-normal text-dark-500"}>
+                                <FormLabel
+                                    className={
+                                        "text-base font-normal text-dark-500"
+                                    }
+                                >
                                     Book Description
                                 </FormLabel>
                                 <FormControl>
@@ -207,7 +252,11 @@ const NewBookForm = () => {
                         name={"videoUrl"}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className={"text-base font-normal text-dark-500"}>
+                                <FormLabel
+                                    className={
+                                        "text-base font-normal text-dark-500"
+                                    }
+                                >
                                     Book trailer
                                 </FormLabel>
                                 <FormControl>
@@ -226,7 +275,11 @@ const NewBookForm = () => {
                         name={"summary"}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className={"text-base font-normal text-dark-500"}>
+                                <FormLabel
+                                    className={
+                                        "text-base font-normal text-dark-500"
+                                    }
+                                >
                                     Book Summary
                                 </FormLabel>
                                 <FormControl>
@@ -245,11 +298,16 @@ const NewBookForm = () => {
                             "bg-primary-admin text-white mt-4 disabled:bg-primary-admin/50 disabled:text-white/50"
                         }
                         type={"submit"}
-                        disabled={form.formState.isSubmitting || !form.formState.isValid}
+                        disabled={
+                            form.formState.isSubmitting ||
+                            !form.formState.isValid
+                        }
                     >
                         {form.formState.isSubmitting ? (
                             <>
-                                <Loader2 className={"animate-spin inline-block mr-2"} />
+                                <Loader2
+                                    className={"animate-spin inline-block mr-2"}
+                                />
                                 <span>Adding New Book...</span>
                             </>
                         ) : (

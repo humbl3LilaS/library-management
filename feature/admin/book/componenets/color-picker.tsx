@@ -12,7 +12,11 @@ const ColorPicker = ({ value, onChange }: ColorPickerProps) => {
                 <p>#</p>
                 <HexColorInput color={value} onChange={onChange} />
             </div>
-            <HexColorPicker color={value} onChange={onChange} className={"flex-1"} />
+            <HexColorPicker
+                color={value}
+                onChange={onChange}
+                className={"flex-1"}
+            />
         </div>
     );
 };

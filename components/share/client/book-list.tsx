@@ -11,7 +11,9 @@ type BookListProps = {
 const BookList = ({ title, books, className }: BookListProps) => {
     return (
         <section className={cn(className)}>
-            <h2 className={"font-bebas-neue text-4xl text-light-100"}>{title}</h2>
+            <h2 className={"font-bebas-neue text-4xl text-light-100"}>
+                {title}
+            </h2>
             <div
                 className={
                     "mt-10  grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"

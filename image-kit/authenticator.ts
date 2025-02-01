@@ -6,7 +6,9 @@ export const authenticator = async () => {
     if (!response.ok) {
         const errorText = await response.text();
 
-        throw new Error(`Request failed with status ${response.status}: ${errorText}`);
+        throw new Error(
+            `Request failed with status ${response.status}: ${errorText}`
+        );
     }
 
     const data = await response.json();

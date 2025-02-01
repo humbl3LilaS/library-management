@@ -8,10 +8,14 @@ import {
     uuid,
     varchar,
 } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
 
-export const STATUS_ENUM = pgEnum("status", ["PENDING", "APPROVED", "REJECTED"]);
+export const STATUS_ENUM = pgEnum("status", [
+    "PENDING",
+    "APPROVED",
+    "REJECTED",
+]);
 export const ROLE_ENUM = pgEnum("role", ["ADMIN", "USER"]);
 export const BOOK_STATUS_ENUM = pgEnum("book_status", ["BORROWED", "RETURNED"]);
 
@@ -25,7 +29,9 @@ export const users = pgTable("users", {
     status: STATUS_ENUM("status").default("PENDING").notNull(),
     role: ROLE_ENUM("role").default("USER").notNull(),
     lastActive: date("last_active").defaultNow().notNull(),
-    createAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    createAt: timestamp("created_at", { withTimezone: true })
+        .defaultNow()
+        .notNull(),
 });
 
 export const books = pgTable("books", {
@@ -41,7 +47,9 @@ export const books = pgTable("books", {
     availableCopies: integer("available_copies").notNull().default(0),
     videoUrl: text("video_url").notNull(),
     summary: varchar("summary", { length: 255 }).notNull(),
-    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+        .defaultNow()
+        .notNull(),
 });
 
 // Zod Schemas
@@ -75,4 +83,7 @@ export const bookInsertSchema = createInsertSchema(books, {
     summary: z.string().trim().min(10),
 });
 
+export const bookSchema = createSelectSchema(books);
+
+export type IBook = Zod.infer<typeof bookSchema>;
 export type IBookInsert = Zod.infer<typeof bookInsertSchema>;

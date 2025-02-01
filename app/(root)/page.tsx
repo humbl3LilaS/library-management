@@ -6,7 +6,11 @@ export default function Home() {
     return (
         <>
             <BookOverview data={SAMPLE_BOOKS[0]} />
-            <BookList title={"Latest Books"} books={SAMPLE_BOOKS} className={"py-20"} />
+            <BookList
+                title={"Latest Books"}
+                books={SAMPLE_BOOKS}
+                className={"py-20"}
+            />
         </>
     );
 }

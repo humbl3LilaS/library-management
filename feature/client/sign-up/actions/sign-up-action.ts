@@ -26,7 +26,10 @@ export const signUp = async (
             };
         }
 
-        const [existingUser] = await db.select().from(users).where(eq(users.email, params.email));
+        const [existingUser] = await db
+            .select()
+            .from(users)
+            .where(eq(users.email, params.email));
         if (existingUser) {
             throw new IAuthError("Existing User Email", {
                 cause: {
@@ -60,7 +63,10 @@ export const signUp = async (
                 fullName: new_user[0].fullName,
             },
         });
-        await signInWithCredentials({ email: params.email, password: params.password });
+        await signInWithCredentials({
+            email: params.email,
+            password: params.password,
+        });
         return { success: true };
     } catch (e: unknown) {
         if (e instanceof IAuthError) {

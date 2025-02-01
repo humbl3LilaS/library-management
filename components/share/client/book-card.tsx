@@ -10,14 +10,18 @@ const BookCard = ({ data }: { data: IBook }) => {
         <article className={cn(data.isLoaned && "max-sm:col-span-2")}>
             <Link
                 href={`/books/${data.id}`}
-                className={cn(data.isLoaned && "max-sm:w-full max-sm:flex flex-col items-center")}
+                className={cn(
+                    data.isLoaned &&
+                        "max-sm:w-full max-sm:flex flex-col items-center"
+                )}
             >
                 <BookCover coverColor={data.color} coverUrl={data.cover} />
             </Link>
             <div
                 className={cn(
                     "mt-4",
-                    data.isLoaned && "xs:max-w-40 max-sm:max-w-28 max-sm:mx-auto"
+                    data.isLoaned &&
+                        "xs:max-w-40 max-sm:max-w-28 max-sm:mx-auto"
                 )}
             >
                 <h3 className={"book-title"}>
@@ -35,7 +39,9 @@ const BookCard = ({ data }: { data: IBook }) => {
                             height={18}
                             className={"object-contain"}
                         />
-                        <p className={"text-light-100"}>11 days left to return</p>
+                        <p className={"text-light-100"}>
+                            11 days left to return
+                        </p>
                     </div>
                     <Button className={"book-btn"}>Download receipt</Button>
                 </div>

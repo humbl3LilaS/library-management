@@ -38,7 +38,13 @@ interface ImageUploaderProps extends ImageUploaderVarient {
     accept: string;
 }
 
-const ImageUploader = ({ onFileChange, value, folder, accept, variant }: ImageUploaderProps) => {
+const ImageUploader = ({
+    onFileChange,
+    value,
+    folder,
+    accept,
+    variant,
+}: ImageUploaderProps) => {
     const ikUploadRef = useRef<HTMLInputElement | null>(null);
     const [uploading, setUploading] = useState(false);
     const { toast } = useToast();
@@ -83,11 +89,19 @@ const ImageUploader = ({ onFileChange, value, folder, accept, variant }: ImageUp
                 onUploadStart={() => setUploading(true)}
             />
 
-            <Button onClick={onUpload} className={cn(imageUploader({ variant }))}>
+            <Button
+                onClick={onUpload}
+                className={cn(imageUploader({ variant }))}
+            >
                 {uploading ? (
                     <Loader2 className={"animate-spin"} />
                 ) : (
-                    <Image src={"/icons/upload.svg"} alt={"upload-icon"} width={20} height={20} />
+                    <Image
+                        src={"/icons/upload.svg"}
+                        alt={"upload-icon"}
+                        width={20}
+                        height={20}
+                    />
                 )}
                 <span className={"font-bold"}>
                     {uploading ? "Uploading Image" : "Upload Image"}
@@ -96,7 +110,13 @@ const ImageUploader = ({ onFileChange, value, folder, accept, variant }: ImageUp
             </Button>
 
             {value && (
-                <IKImage alt={value} path={value} width={500} height={300} className={"w-full"} />
+                <IKImage
+                    alt={value}
+                    path={value}
+                    width={500}
+                    height={300}
+                    className={"w-full"}
+                />
             )}
         </ImageKitProvider>
     );

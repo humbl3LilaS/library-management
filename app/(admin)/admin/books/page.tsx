@@ -4,7 +4,9 @@ import Link from "next/link";
 const BookPage = () => {
     return (
         <section className={"w-full p-7 rounded-2xl bg-white shadow-sm"}>
-            <div className={"flex flex-wrap items-center justify-between gap-4"}>
+            <div
+                className={"flex flex-wrap items-center justify-between gap-4"}
+            >
                 <h2 className={"text-xl font-semibold"}>All Books</h2>
                 <Button
                     asChild={true}

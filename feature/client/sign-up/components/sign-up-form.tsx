@@ -2,7 +2,13 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { SignUpSchemaDefaultValues } from "@/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -56,8 +62,8 @@ const SignUpForm = () => {
                         Welcome back to BookWise
                     </h1>
                     <p>
-                        Please complete all fields and upload a valid id to gain access to the
-                        library
+                        Please complete all fields and upload a valid id to gain
+                        access to the library
                     </p>
                     <FormField
                         control={form.control}
@@ -117,7 +123,10 @@ const SignUpForm = () => {
                             <FormItem>
                                 <FormLabel>Password</FormLabel>
                                 <FormControl>
-                                    <PasswordField onChange={field.onChange} value={field.value} />
+                                    <PasswordField
+                                        onChange={field.onChange}
+                                        value={field.value}
+                                    />
                                 </FormControl>
                             </FormItem>
                         )}
@@ -144,11 +153,16 @@ const SignUpForm = () => {
                     <Button
                         className={"form-btn mt-4"}
                         type={"submit"}
-                        disabled={form.formState.isSubmitting || !form.formState.isValid}
+                        disabled={
+                            form.formState.isSubmitting ||
+                            !form.formState.isValid
+                        }
                     >
                         {form.formState.isSubmitting ? (
                             <>
-                                <Loader2 className={"animate-spin inline-block mr-2"} />
+                                <Loader2
+                                    className={"animate-spin inline-block mr-2"}
+                                />
                                 <span>Signing Up..</span>
                             </>
                         ) : (

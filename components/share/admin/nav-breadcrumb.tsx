@@ -22,7 +22,8 @@ const NavBreadcrumb = () => {
                                 className={"capitalize"}
                                 href={
                                     idx > 0
-                                        ? "/" + segments.slice(0, idx + 1).join("/")
+                                        ? "/" +
+                                          segments.slice(0, idx + 1).join("/")
                                         : `/${item}`
                                 }
                             >

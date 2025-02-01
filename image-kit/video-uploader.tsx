@@ -15,7 +15,12 @@ type VideoUploaderProps = {
     accept: string;
 };
 
-const VideoUploader = ({ onFileChange, value, folder, accept }: VideoUploaderProps) => {
+const VideoUploader = ({
+    onFileChange,
+    value,
+    folder,
+    accept,
+}: VideoUploaderProps) => {
     const ikUploadRef = useRef<HTMLInputElement | null>(null);
     const [uploading, setUploading] = useState(false);
     const { toast } = useToast();
@@ -48,7 +53,8 @@ const VideoUploader = ({ onFileChange, value, folder, accept }: VideoUploaderPro
         if (file.size > 50 * 1024 * 1024) {
             toast({
                 title: "File size too large",
-                description: "Please upload a file that is less than 50MB in size",
+                description:
+                    "Please upload a file that is less than 50MB in size",
                 variant: "destructive",
             });
             return false;
@@ -82,7 +88,12 @@ const VideoUploader = ({ onFileChange, value, folder, accept }: VideoUploaderPro
                 {uploading ? (
                     <Loader2 className={"animate-spin"} />
                 ) : (
-                    <Image src={"/icons/upload.svg"} alt={"upload-icon"} width={20} height={20} />
+                    <Image
+                        src={"/icons/upload.svg"}
+                        alt={"upload-icon"}
+                        width={20}
+                        height={20}
+                    />
                 )}
                 <span className={"font-bold"}>
                     {uploading ? "Uploading Video" : "Upload Video"}
@@ -90,7 +101,13 @@ const VideoUploader = ({ onFileChange, value, folder, accept }: VideoUploaderPro
                 {value && <span className={"block"}>{value}</span>}
             </Button>
 
-            {value && <IKVideo path={value} controls={true} className={"h-96 w-full rounded-xl"} />}
+            {value && (
+                <IKVideo
+                    path={value}
+                    controls={true}
+                    className={"h-96 w-full rounded-xl"}
+                />
+            )}
         </ImageKitProvider>
     );
 };

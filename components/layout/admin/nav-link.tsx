@@ -16,7 +16,10 @@ const NavLink = ({ data }: { data: AdminNavLinkProps }) => {
         <li key={data.title}>
             <Link
                 href={data.href}
-                className={cn("link", data.href === pathname && "bg-primary-admin  shadow-sm")}
+                className={cn(
+                    "link",
+                    data.href === pathname && "bg-primary-admin  shadow-sm"
+                )}
             >
                 <Image
                     src={data.icon}
@@ -28,7 +31,11 @@ const NavLink = ({ data }: { data: AdminNavLinkProps }) => {
                         data.href === pathname && "brightness-0 invert"
                     )}
                 />
-                <span className={cn(data.href === pathname ? "text-white" : "text-dark")}>
+                <span
+                    className={cn(
+                        data.href === pathname ? "text-white" : "text-dark"
+                    )}
+                >
                     {data.title}
                 </span>
             </Link>

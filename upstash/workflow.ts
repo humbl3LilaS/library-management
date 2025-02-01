@@ -16,7 +16,11 @@ type SendEmailPayload = {
     subject: string;
     message: string;
 };
-export const sendEmail = async ({ email, subject, message }: SendEmailPayload) => {
+export const sendEmail = async ({
+    email,
+    subject,
+    message,
+}: SendEmailPayload) => {
     await qstashClient.publishJSON({
         api: {
             name: "email",

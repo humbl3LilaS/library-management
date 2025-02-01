@@ -12,14 +12,24 @@ const BookOverview = ({ data }: { data: IBook }) => {
                 {/*Book Info*/}
                 <div className={"book-info"}>
                     <p>
-                        By <span className={"font-semibold text-light-200"}>{data.author}</span>
+                        By{" "}
+                        <span className={"font-semibold text-light-200"}>
+                            {data.author}
+                        </span>
                     </p>
                     <p>
                         Category&nbsp;
-                        <span className={"font-semibold text-light-200"}>{data.genre}</span>
+                        <span className={"font-semibold text-light-200"}>
+                            {data.genre}
+                        </span>
                     </p>
                     <div className={"flex flex-row gap-1"}>
-                        <Image src={"/icons/star.svg"} alt={"start"} width={22} height={22} />
+                        <Image
+                            src={"/icons/star.svg"}
+                            alt={"start"}
+                            width={22}
+                            height={22}
+                        />
                         <p>{data.rating}</p>
                     </div>
                 </div>
@@ -38,8 +48,15 @@ const BookOverview = ({ data }: { data: IBook }) => {
                 <p className={"book-description"}>{data.description}</p>
 
                 <Button className={"book-overview_btn"}>
-                    <Image src={"/icons/book.svg"} alt={"books"} width={20} height={20} />
-                    <span className={"font-bebas-neue text-xl text-bark-100"}>Borrow</span>
+                    <Image
+                        src={"/icons/book.svg"}
+                        alt={"books"}
+                        width={20}
+                        height={20}
+                    />
+                    <span className={"font-bebas-neue text-xl text-bark-100"}>
+                        Borrow
+                    </span>
                 </Button>
             </div>
             <div className={"relative flex flex-1 justify-center"}>
@@ -52,7 +69,11 @@ const BookOverview = ({ data }: { data: IBook }) => {
                     />
                 </div>
                 <div className="absolute right-16 top-10 rotate-12 opacity-40 max-sm:hidden">
-                    <BookCover variant={"wide"} coverColor={data.color} coverUrl={data.cover} />
+                    <BookCover
+                        variant={"wide"}
+                        coverColor={data.color}
+                        coverUrl={data.cover}
+                    />
                 </div>
             </div>
         </section>

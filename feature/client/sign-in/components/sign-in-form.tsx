@@ -2,7 +2,13 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { SignInSchema, TSignInSchema } from "@/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -54,7 +60,9 @@ const SignInForm = () => {
                     <h1 className={"text-2xl font-semibold font-white"}>
                         Welcome back to BookWise
                     </h1>
-                    <p>Access the vast collection of resource, and stay updated</p>
+                    <p>
+                        Access the vast collection of resource, and stay updated
+                    </p>
                     <FormField
                         control={form.control}
                         name={"email"}
@@ -79,7 +87,10 @@ const SignInForm = () => {
                             <FormItem>
                                 <FormLabel>Password</FormLabel>
                                 <FormControl>
-                                    <PasswordField onChange={field.onChange} value={field.value} />
+                                    <PasswordField
+                                        onChange={field.onChange}
+                                        value={field.value}
+                                    />
                                 </FormControl>
                             </FormItem>
                         )}
@@ -87,11 +98,16 @@ const SignInForm = () => {
                     <Button
                         className={"form-btn mt-4"}
                         type={"submit"}
-                        disabled={form.formState.isSubmitting || !form.formState.isValid}
+                        disabled={
+                            form.formState.isSubmitting ||
+                            !form.formState.isValid
+                        }
                     >
                         {form.formState.isSubmitting ? (
                             <>
-                                <Loader2 className={"animate-spin inline-block mr-2"} />
+                                <Loader2
+                                    className={"animate-spin inline-block mr-2"}
+                                />
                                 <span>Signing In..</span>
                             </>
                         ) : (
