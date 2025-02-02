@@ -1,7 +1,7 @@
-import { IBook } from "@/types/index.types";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import BookCover from "@/components/share/client/book-cover";
+import { IBook } from "@/database/schema";
 
 const BookOverview = ({ data }: { data: IBook }) => {
     return (
@@ -37,10 +37,10 @@ const BookOverview = ({ data }: { data: IBook }) => {
                 {/*Book Availability*/}
                 <div className={"book-copies"}>
                     <p>
-                        Total Books: <span>{data.total_copies}</span>
+                        Total Books: <span>{data.totalCopies}</span>
                     </p>
                     <p>
-                        Available Books <span>{data.available_copies}</span>
+                        Available Books <span>{data.availableCopies}</span>
                     </p>
                 </div>
 
@@ -64,15 +64,15 @@ const BookOverview = ({ data }: { data: IBook }) => {
                     <BookCover
                         variant={"wide"}
                         className={"z-10"}
-                        coverColor={data.color}
-                        coverUrl={data.cover}
+                        coverColor={data.coverColor}
+                        coverUrl={data.coverUrl}
                     />
                 </div>
                 <div className="absolute right-16 top-10 rotate-12 opacity-40 max-sm:hidden">
                     <BookCover
                         variant={"wide"}
-                        coverColor={data.color}
-                        coverUrl={data.cover}
+                        coverColor={data.coverColor}
+                        coverUrl={data.coverUrl}
                     />
                 </div>
             </div>
