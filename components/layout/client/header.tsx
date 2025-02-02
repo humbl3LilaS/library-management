@@ -11,7 +11,7 @@ const Header = async () => {
 
     return (
         <header className={"py-10 flex justify-between gap-5"}>
-            <Link href="/public">
+            <Link href="/">
                 <Image
                     src={"/icons/logo.svg"}
                     alt={"logo"}

@@ -17,7 +17,10 @@ export const STATUS_ENUM = pgEnum("status", [
     "REJECTED",
 ]);
 export const ROLE_ENUM = pgEnum("role", ["ADMIN", "USER"]);
-export const BOOK_STATUS_ENUM = pgEnum("book_status", ["BORROWED", "RETURNED"]);
+export const BORROW_STATUS_ENUM = pgEnum("book_status", [
+    "BORROWED",
+    "RETURNED",
+]);
 
 export const users = pgTable("users", {
     id: uuid("id").notNull().primaryKey().defaultRandom().unique(),
@@ -47,6 +50,23 @@ export const books = pgTable("books", {
     availableCopies: integer("available_copies").notNull().default(0),
     videoUrl: text("video_url").notNull(),
     summary: text("summary").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+        .defaultNow()
+        .notNull(),
+});
+
+export const borrowRecords = pgTable("borrow_records", {
+    id: uuid("id").notNull().primaryKey().defaultRandom().unique(),
+    userId: uuid("user_id")
+        .references(() => users.id)
+        .notNull(),
+    bookId: uuid("book_id").references(() => books.id),
+    borrowDate: timestamp("borrow_date", { withTimezone: true })
+        .defaultNow()
+        .notNull(),
+    dueDate: date("due_date").notNull(),
+    returnDate: date("return_date"),
+    status: BORROW_STATUS_ENUM("STATUS_ENUM").default("BORROWED").notNull(),
     createdAt: timestamp("created_at", { withTimezone: true })
         .defaultNow()
         .notNull(),
@@ -87,3 +107,6 @@ export const bookSchema = createSelectSchema(books);
 
 export type IBook = Zod.infer<typeof bookSchema>;
 export type IBookInsert = Zod.infer<typeof bookInsertSchema>;
+
+export const borrowRecordsSchema = createSelectSchema(borrowRecords);
+export type IBorrowRecord = Zod.infer<typeof borrowRecordsSchema>;

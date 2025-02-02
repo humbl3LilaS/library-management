@@ -14,7 +14,6 @@ const BookDetailPage = async ({
     if (!book.success) {
         return notFound();
     }
-
     return (
         <>
             <BookOverview data={book.data} />

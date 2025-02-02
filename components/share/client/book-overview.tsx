@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import BookCover from "@/components/share/client/book-cover";
 import { IBook } from "@/database/schema";
+import BookBorrowBtn from "@/feature/client/books/componenets/book-borrow-btn";
 
 const BookOverview = ({ data }: { data: IBook }) => {
     return (
@@ -47,17 +47,7 @@ const BookOverview = ({ data }: { data: IBook }) => {
                 {/* Book Description */}
                 <p className={"book-description"}>{data.description}</p>
 
-                <Button className={"book-overview_btn"}>
-                    <Image
-                        src={"/icons/book.svg"}
-                        alt={"books"}
-                        width={20}
-                        height={20}
-                    />
-                    <span className={"font-bebas-neue text-xl text-bark-100"}>
-                        Borrow
-                    </span>
-                </Button>
+                <BookBorrowBtn />
             </div>
             <div className={"relative flex flex-1 justify-center"}>
                 <div className="relative">
