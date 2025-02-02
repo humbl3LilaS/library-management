@@ -14,10 +14,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import ImageUploader from "@/components/image-kit/image-uploader";
 import VideoUploader from "@/image-kit/video-uploader";
-import ColorPicker from "@/feature/admin/book/componenets/color-picker";
+import ColorPicker from "@/feature/admin/books/componenets/color-picker";
 import { Loader2 } from "lucide-react";
 import { bookInsertSchema, IBookInsert } from "@/database/schema";
-import { addNewBook } from "@/feature/admin/book/actions/add-new-book";
+import { addNewBook } from "@/feature/admin/books/actions/add-new-book";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 
@@ -36,7 +36,7 @@ const NewBookForm = () => {
         const result = await addNewBook(values);
         if (!result.success) {
             return toast({
-                title: "Failed to add new book",
+                title: "Failed to add new books",
                 description: result.cause.reason,
                 variant: "destructive",
             });

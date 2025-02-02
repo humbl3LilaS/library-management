@@ -1,5 +1,5 @@
 import NavBreadcrumb from "@/components/share/admin/nav-breadcrumb";
-import NewBookForm from "@/feature/admin/book/componenets/new-book-form";
+import NewBookForm from "@/feature/admin/books/componenets/new-book-form";
 
 const NewBookPage = () => {
     return (

@@ -33,7 +33,7 @@ export const addNewBook = async (
         return {
             success: false,
             cause: {
-                reason: "Error crating new book",
+                reason: "Error crating new books",
             },
         };
     }
