@@ -5,7 +5,8 @@ import { users } from "@/database/schema";
 import { eq } from "drizzle-orm";
 import { auth } from "@/auth";
 
-type UserRole = "NOT-LOGIN" | "USER" | "ADMIN";
+type UserRole = Unauthorized | "ADMIN";
+type Unauthorized = "NOT-LOGIN" | "NOT-VERIFIED" | "USER";
 
 export const checkUserRole = async (): Promise<UserRole> => {
     const session = await auth();
@@ -13,12 +14,15 @@ export const checkUserRole = async (): Promise<UserRole> => {
         return "NOT-LOGIN";
     }
     const [user] = await db
-        .select({ role: users.role })
+        .select({ role: users.role, status: users.status })
         .from(users)
         .where(eq(users.id, session.user?.id))
         .limit(1);
     if (!user) {
-        return "NOT-LOGIN";
+        return "USER";
+    }
+    if (user.status !== "APPROVED") {
+        return "NOT-VERIFIED";
     }
     return user.role;
 };

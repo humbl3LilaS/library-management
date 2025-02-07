@@ -7,6 +7,6 @@ export const ADMIN_NAV_ITEMS = [
     {
         title: "books",
         href: "/admin/books",
-        icon: "/icons/admin/books.svg",
+        icon: "/icons/admin/book.svg",
     },
 ];
